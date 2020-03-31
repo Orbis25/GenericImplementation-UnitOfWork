@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using GenericUnitOfWork.UoW;
 using GenericUnitOfWork.Models;
+using GenericUnitOfWork.UoW.Normal;
 
 namespace GenericUnitOfWork
 {
@@ -35,7 +36,8 @@ namespace GenericUnitOfWork
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.Configure<Test>(Configuration.GetSection(nameof(Test)));
-            services.AddTransient(typeof(IUnitOfWork<,>), typeof(GenericUnitOfWork<,>));
+            services.AddTransient(typeof(IGenericUnitOfWork<,>), typeof(GenericUnitOfWork<,>));
+            services.AddTransient<IUnitOfWork,UnitOfWork>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

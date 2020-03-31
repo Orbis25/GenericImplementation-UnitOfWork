@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericUnitOfWork.UoW
 {
-    public interface IUnitOfWork<TService, TContext>
+    public interface IGenericUnitOfWork<TService, TContext>
         where TService : class
         where TContext : DbContext
     {

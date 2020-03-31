@@ -52,5 +52,21 @@ namespace GenericUnitOfWork.BussinesLogic.Services
         }
     }
 
+    public interface ITestThreeService
+    {
+        Task<string> GetUserName();
+    }
+
+    public class TestThreeService : ITestThreeService
+    {
+        private readonly ApplicationDbContext _db;
+        public TestThreeService(ApplicationDbContext db) => _db = db;
+
+        public async Task<string> GetUserName()
+        {
+            var result = await _db.Users.FirstOrDefaultAsync();
+            return result.UserName;
+        }
+    }
 
 }

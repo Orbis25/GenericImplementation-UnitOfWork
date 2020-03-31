@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GenericUnitOfWork.UoW
 {
-    public class GenericUnitOfWork<TService, TContext> : IUnitOfWork<TService, TContext>
+    public class GenericUnitOfWork<TService, TContext> : IGenericUnitOfWork<TService, TContext>
         where TContext : DbContext
         where TService : class
     {
@@ -20,7 +20,7 @@ namespace GenericUnitOfWork.UoW
         }
 
         public TService GetRepository<TClass>(List<object> parameters) where TClass : class
-        {
+        {   
             parameters.Insert(0, _context);
             var obj = parameters.Select(x => x).ToArray();
             var result = (TService)Activator.CreateInstance(typeof(TClass), obj);
